@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Watch</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .mywatch{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0 , 0.5);
+            padding: 30px;
+        }
+        .hour{
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        .month{
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+    <div class="mywatch">
+        <span class="hour"></span>
+        <br>
+        <span class="month"></span>
+        <span class="date"></span>
+    </div>
+
+
+    <script>
+        function myTime(){
+            let d = new Date();
+            let h = d.getHours();
+            h.className = "hrs"
+            let m = d.getMinutes();
+            let s = d.getSeconds();
+            
+            var hour = (h<10)? "0"+h:h;
+            var min =(m<10)? "0"+m:m;
+            var sec =(s<10)? "0"+s:s;
+            
+            if(hour>12){
+                hour = hour-12;
+            }else{
+                hour = hour;
+            }
+            var hr = (h>12)? "PM":"AM"
+            
+
+            document.getElementsByClassName("hour")[0].innerHTML = hour+" : "+min+ " : "+sec+" "+hr;
+
+            var myDay = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Satarday"]
+
+            var mymonth =["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+
+            var FullDate = myDay[d.getDay()] + ", " + mymonth[d.getMonth()]+" - "+ d.getDate()+", "+d.getFullYear();
+            document.getElementsByClassName("month")[0].innerHTML = FullDate 
+
+        }
+        myTime()
+        setInterval(function(){
+            myTime()
+        }, 1000)
+    </script>
+</body>
+
+</html>
